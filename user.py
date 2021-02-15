@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
+import urllib.request
 import re
-import random
 import json
 from urllib.parse import quote
 import string

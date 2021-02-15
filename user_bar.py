@@ -4,6 +4,7 @@ from urllib.request import urlopen
 import re
 import random
 
+
 url = "https://tieba.baidu.com/home/main?un=%E4%B8%BF%E4%B8%A8%E6%83%85%E4%B9%A6"
 html = urlopen(url).read().decode('utf-8')
 soup = BeautifulSoup(html, features='lxml')
