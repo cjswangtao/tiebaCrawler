@@ -1,3 +1,4 @@
+""" 整合了三个部分功能的完整版爬虫，爬用户关注的吧(不包含楼中楼) """
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from urllib.request import Request
@@ -6,7 +7,7 @@ import json
 from urllib.parse import quote
 import  string
 import requests
-""" 整合了三个部分功能的完整版爬虫 """
+
 #构建请求头,伪装浏览器
 headers = {
     'User-Agent': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; InfoPath.3)'
@@ -21,13 +22,13 @@ one_base_url = "https://tieba.baidu.com/home/main?un="
 
 #打开南京信息职业技术学院吧的主页,获取该也全部帖子的url,20页帖子的url
 #修改
-for pn in range(0,3):
+for pn in range(0,1):
     #南京信息职业技术学院吧第n页的url
     base_url = "https://tieba.baidu.com/f?kw=%E5%8D%97%E4%BA%AC%E4%BF%A1%E6%81%AF%E8%81%8C%E4%B8%9A%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2&ie=utf-8&pn="+str(pn)
     agent_url = Request(url=base_url,headers=headers)
     html = urlopen(agent_url).read().decode('utf-8')
     soup = BeautifulSoup(html, features='lxml')
-    infos = soup.find_all("a",{"target":"_blank","rel":"noreferrer","class":"j_th_tit"})
+    infos = soup.find_all("a",{"target":"_blank","rel":"noreferrer","class":"j_th_tit"}) #获取第一页所以所有帖子的名称和id
     for info in infos:
         if(info.string!=None and info.string!='0'):
             layer_url = prefix_url+info["href"]
@@ -81,7 +82,7 @@ for key in result:
 print(result)
 
 #将result中的数据保存到user.json中
-fo = open("demo.json","w",encoding="utf-8")
+fo = open("demo01.json","w",encoding="utf-8")
 s = json.dumps(result,ensure_ascii=False)
 fo.write(s)
 fo.close()

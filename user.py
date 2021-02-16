@@ -1,10 +1,10 @@
+""" 爬楼不包含楼中楼(楼主用户信息)"""
 from bs4 import BeautifulSoup
 import urllib.request
 import re
 import json
 from urllib.parse import quote
 import string
-"""抓取一个帖子中所以层主的url和id并保存"""
 
 result={}
 #4796371684帖子的url
@@ -46,7 +46,7 @@ print(result)
 
 #将result写如user.json
 fo = open("user.json", "w")
-fo.write(json.dumps(result))
+fo.write(json.dumps(result,ensure_ascii=False))
 fo.close()
 
     
