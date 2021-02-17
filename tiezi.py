@@ -7,7 +7,7 @@ db = pymysql.connect(host="localhost", user="root", passwd="root",db="tieba")
 """ 获取https://tieba.baidu.com/f?kw=%E5%8D%97%E4%BA%AC%E4%BF%A1%E6%81%AF%E8%81%8C%E4%B8%9A%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2&ie=utf-8&pn=0页面的所有帖子名称和url """
 prefix_url = "https://tieba.baidu.com"
 #南京信息职业技术学院第一页
-#爬取50页的帖子名称和网址
+#爬取10页的帖子名称和网址
 
 #将数据插入数据库
 def insert(title,url):
