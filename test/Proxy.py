@@ -22,5 +22,5 @@ def getHtml():
     # 删除代理池中代理
     delete_proxy(proxy)
     return None
-
-print(type(getHtml()))
+    
+print(getHtml().text)

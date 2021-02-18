@@ -1,4 +1,4 @@
-""" 在个人主页抓取个人关注的吧 """
+""" 在个人主页抓取个人关注的吧(测试模块不需要数据库) """
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import re

@@ -1,8 +1,7 @@
-""" 爬取楼中楼(测试数据用) """
+""" 爬取楼中楼(测试模块) """
 #测试通过成功爬取4796371684帖子第一页的全部楼中楼评论
 # 
-# 
-# #
+
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from urllib.request import Request
@@ -18,9 +17,7 @@ tiezi_url = "https://tieba.baidu.com/p/4796371684"
 headers = {
     'User-Agent': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; InfoPath.3)'
 }
-# https://tieba.baidu.com/p/comment?tid=4796371684&pid=98301178347&pn=2
-# 
-# #
+
 
 #解析url为soup
 def getSoup(url):
@@ -33,11 +30,6 @@ def getSoup(url):
 def getUrl(pid,pn):
     return "https://tieba.baidu.com/p/comment?tid=4796371684&pid="+pid+"&pn="+str(pn)
 
-
-#打印list中的数据
-def iter(elems):
-    for elem in elems:
-        print(elem)
 
 #根据xhr分析网络通信 获得基础的url组合,在网页源码搜索清洗
 soup = getSoup(tiezi_url)
@@ -58,14 +50,21 @@ for elem in elems:
             if a_page.string == "尾页":
                 pns = int(a_page["href"].replace("#","")) + 1
 
+    #获得楼中楼中所有的评论:
+    # for pn in range(1,pns):
+    #     soup = getSoup(getUrl(pid,pn))
+    #     span_tages = soup.find_all("span",{"class":"lzl_content_main"})
+    #     for span_tage in span_tages:
+    #         ans = re.sub(r'<\/?.+?\/?>',"",str(span_tage)) #清洗所有的标签
+    #         print(ans)
 
     for pn in range(1,pns):
         soup = getSoup(getUrl(pid,pn))
-        span_tages = soup.find_all("span",{"class":"lzl_content_main"})
-        for span_tage in span_tages:
-            ans = re.sub(r'<\/?.+?\/?>',"",str(span_tage)) #清洗所有的标签
-            print(ans)
-
+        tags = soup.findAll("a",{"rel":"noopener","class":"j_user_card lzl_p_p"})
+        for tag in tags:
+            username = tag["username"]
+            one_url = tag["href"]
+            print(username+"\t"+one_url)
 
 
 

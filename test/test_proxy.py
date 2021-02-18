@@ -21,7 +21,8 @@ def getHeader():
     agent_header = Agent()
     value = agent_header.get_user_agent()
     header['User-Agent'] = value
-    header["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+    header["Connection"] = "keep-alive"
+    header["Accept"] = "text/html, */*; q=0.01"
     header["Accept-Encoding"] = "gzip, deflate, sdch"
     header["Accept-Language"] = "zh-CN,zh;q=0.8,ja;q=0.6"
     return header
@@ -98,9 +99,8 @@ def getUrls(begin,end):
         for pn in range(begin,end)
     ]
 
-#2000-3400 
-#多进程
+#2000-3600 end4000 
 if __name__ == '__main__':
-    urls = getUrls(3000,3400)
+    urls = getUrls(4200,5000)
     pool = mp.Pool(4)
     pool.map(insertTiezi,urls)

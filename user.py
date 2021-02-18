@@ -1,4 +1,4 @@
-""" 爬楼不包含楼中楼(楼主用户信息)"""
+""" 爬楼不包含楼中楼(楼主用户信息) 测试模块不需要数据库"""
 from bs4 import BeautifulSoup
 import urllib.request
 import re
@@ -16,7 +16,10 @@ one_base_url = "https://tieba.baidu.com/home/main?un="
 html = urlopen(layer_url).read().decode('utf-8')
 soup = BeautifulSoup(html, features='lxml')
 page = soup.find_all("span",{"class":"red","style":""}) #获取贴吧红色的数字
-pns = int(page[0].string)
+if len(page) == 0:
+    pns = 2
+else:
+    pns = int(page[0].string)
 users = soup.find_all("img",{"username":re.compile("^[\u4e00-\u9fa5_a-zA-Z0-9]+$"),"class":""})
 for user in users:
     if(user["username"] not in result):
