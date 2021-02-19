@@ -1,4 +1,4 @@
-""" 整合了三个部分功能的完整版爬虫，爬用户关注的吧(不包含楼中楼) """
+""" 整合了部分测试模块的功能相对完善版的爬虫，爬用户关注的吧(不包含楼中楼) """
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from urllib.request import Request

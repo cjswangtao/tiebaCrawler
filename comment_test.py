@@ -50,21 +50,21 @@ for elem in elems:
             if a_page.string == "尾页":
                 pns = int(a_page["href"].replace("#","")) + 1
 
-    #获得楼中楼中所有的评论:
-    # for pn in range(1,pns):
-    #     soup = getSoup(getUrl(pid,pn))
-    #     span_tages = soup.find_all("span",{"class":"lzl_content_main"})
-    #     for span_tage in span_tages:
-    #         ans = re.sub(r'<\/?.+?\/?>',"",str(span_tage)) #清洗所有的标签
-    #         print(ans)
-
+    # 获得楼中楼中所有的评论:
     for pn in range(1,pns):
         soup = getSoup(getUrl(pid,pn))
-        tags = soup.findAll("a",{"rel":"noopener","class":"j_user_card lzl_p_p"})
-        for tag in tags:
-            username = tag["username"]
-            one_url = tag["href"]
-            print(username+"\t"+one_url)
+        span_tages = soup.find_all("span",{"class":"lzl_content_main"})
+        for span_tage in span_tages:
+            ans = re.sub(r'<\/?.+?\/?>',"",str(span_tage)) #清洗所有的标签
+            print(ans)
+    # 功能需求测试用
+    # for pn in range(1,pns):
+    #     soup = getSoup(getUrl(pid,pn))
+    #     tags = soup.findAll("a",{"rel":"noopener","class":"j_user_card lzl_p_p"})
+    #     for tag in tags:
+    #         username = tag["username"]
+    #         one_url = tag["href"]
+    #         print(username+"\t"+one_url)
 
 
 

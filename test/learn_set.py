@@ -1,7 +1,0 @@
-a = set()
-a.add('a')
-a.add(1)
-a.add("string")
-a.add('a')
-a.add(1)
-print(a)
